@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#05070d">
+  <title>MISSION: MARS — Interactive Mission</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body><div class="scroll-progress" id="scrollProgress"></div>
+  <div id="loader" class="loader">
+    <div class="loader-orbit"><span></span></div>
+    <div class="loader-kicker">NASA // DEEP SPACE PROGRAM</div>
+    <h1>MISSION:<span>MARS</span></h1>
+    <div class="loader-bar"><i id="loaderBar"></i></div>
+    <div class="loader-status"><span>INITIALIZING MISSION SYSTEMS</span><b id="loaderPct">0%</b></div>
+  </div>
+
+  <div class="noise"></div>
+  <canvas id="stars"></canvas>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <header class="nav">
+    <a href="#top" class="brand"><span class="brand-dot"></span>MISSION:<b>MARS</b></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+    <nav id="navLinks">
+      <a href="#journey">JOURNEY</a>
+      <a href="#control">CONTROL</a>
+      <a href="#rover">ROVER</a>
+      <a href="#life">LIFE</a>
+      <a href="#base">BASE</a>
+      <a href="#final">MISSION</a>
+    </nav>
+    <button class="sound-btn" id="soundBtn">◉ SOUND OFF</button>
+  </header>
+
+  <main id="top">
+    <section class="hero section">
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><span></span> HUMANITY'S NEXT GIANT LEAP</div>
+        <h1>THE RED<br><em>PLANET</em><br>AWAITS.</h1>
+        <p>A cinematic interactive mission from Earth to Mars. Explore the journey, survive the environment, search for life and build the first human outpost.</p>
+        <div class="hero-actions">
+          <a class="btn primary magnetic" href="#journey">BEGIN MISSION <span>↗</span></a>
+          <a class="btn ghost" href="#control">MISSION CONTROL</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>225M KM</b><span>AVERAGE DISTANCE</span></div>
+          <div><b>7 MONTHS</b><span>TRANSIT TIME</span></div>
+          <div><b>-63°C</b><span>AVG. SURFACE TEMP</span></div>
+        </div>
+      </div>
+      <div class="mars-stage reveal">
+        <div class="mars-halo"></div>
+        <div class="mars" id="mars">
+          <div class="mars-shade"></div><div class="mars-clouds"></div><div class="mars-crater c1"></div><div class="mars-crater c2"></div><div class="mars-crater c3"></div>
+        </div>
+        <div class="mars-label"><span>PLANET 04</span><b>MARS</b><small>LOCAL TIME · SOL 184</small></div>
+        <div class="orbit orbit1"></div><div class="orbit orbit2"></div>
+      </div>
+    </section>
+
+    <section class="section journey" id="journey">
+      <div class="section-head reveal"><div class="eyebrow">01 // THE JOURNEY</div><h2>EARTH TO <em>MARS.</em></h2><p>Six phases. One extraordinary distance.</p></div>
+      <div class="journey-track reveal">
+        <div class="route-line"><i id="routeProgress"></i></div>
+        <div class="journey-stage active" data-phase="EARTH">
+          <span class="stage-icon">◎</span><b>EARTH</b><small>LAUNCH</small>
+        </div>
+        <div class="journey-stage" data-phase="MOON">
+          <span class="stage-icon">◐</span><b>MOON</b><small>GRAVITY ASSIST</small>
+        </div>
+        <div class="journey-stage" data-phase="DEEP SPACE">
+          <span class="stage-icon">✦</span><b>DEEP SPACE</b><small>CRUISE</small>
+        </div>
+        <div class="journey-stage" data-phase="MARS ORBIT">
+          <span class="stage-icon">◉</span><b>MARS ORBIT</b><small>INSERTION</small>
+        </div>
+        <div class="journey-stage" data-phase="DESCENT">
+          <span class="stage-icon">⌄</span><b>DESCENT</b><small>LANDING</small>
+        </div>
+        <div class="journey-stage" data-phase="SURFACE">
+          <span class="stage-icon">◆</span><b>SURFACE</b><small>EXPLORE</small>
+        </div>
+      </div>
+      <div class="journey-info glass reveal" id="journeyInfo">
+        <div><span id="phaseNo">PHASE 01</span><h3 id="phaseTitle">EARTH LAUNCH</h3><p id="phaseText">The mission begins with a controlled ascent through Earth's atmosphere. Every system is checked twice before ignition.</p></div>
+        <div class="metric"><span>DISTANCE</span><b id="phaseDistance">0 KM</b></div>
+        <div class="metric"><span>STATUS</span><b class="green" id="phaseStatus">NOMINAL</b></div>
+      </div>
+    </section>
+
+    <section class="launch section">
+      <div class="launch-copy reveal">
+        <div class="eyebrow">02 // LAUNCH WINDOW</div>
+        <h2>10 SECONDS<br>TO <em>IGNITION.</em></h2>
+        <p>Experience the first critical moment of the mission. The countdown is synchronized with a cinematic launch sequence.</p>
+        <button class="btn primary" id="launchBtn">START COUNTDOWN</button>
+      </div>
+      <div class="launch-screen glass reveal">
+        <div class="countdown" id="countdown">T−10</div>
+        <div class="rocket-wrap" id="rocketWrap"><div class="rocket">🚀</div><div class="flame"></div></div>
+        <div class="launch-readout"><span id="launchState">SYSTEMS READY</span><b>LC-39A</b></div>
+      </div>
+    </section>
+
+    <section class="section control" id="control">
+      <div class="section-head reveal"><div class="eyebrow">03 // MISSION CONTROL</div><h2>EVERY <em>SECOND</em> COUNTS.</h2><p>Telemetry from a fictional Mars transfer vehicle, rendered live in your browser.</p></div>
+      <div class="control-grid">
+        <div class="telemetry glass reveal">
+          <div class="panel-title"><span>LIVE TELEMETRY</span><b>● LIVE</b></div>
+          <div class="telemetry-grid">
+            <div><span>VELOCITY</span><strong id="velocity">24,781</strong><small>KM/H</small></div>
+            <div><span>FUEL</span><strong id="fuel">87</strong><small>%</small></div>
+            <div><span>SIGNAL</span><strong id="signal">98</strong><small>%</small></div>
+            <div><span>RADIATION</span><strong id="radiation">0.42</strong><small>mSv/h</small></div>
+            <div><span>HULL TEMP</span><strong id="hullTemp">21</strong><small>°C</small></div>
+            <div><span>SOLAR</span><strong id="solar">94</strong><small>%</small></div>
+          </div>
+          <div class="telemetry-bars">
+            <label>POWER <i><b style="width:92%"></b></i></label>
+            <label>COMMS <i><b style="width:76%"></b></i></label>
+            <label>LIFE SUPPORT <i><b style="width:88%"></b></i></label>
+          </div>
+        </div>
+        <div class="mission-clock glass reveal">
+          <span>MISSION ELAPSED</span><strong id="missionTime">184:07:42</strong><small>SOL 184 · MARS TRANSFER DAY 128</small>
+          <div class="clock-ring"><i></i><b>184</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section rover" id="rover">
+      <div class="section-head reveal"><div class="eyebrow">04 // SURFACE OPERATIONS</div><h2>MEET <em>ATLAS.</em></h2><p>Our autonomous rover is designed to read the landscape before humans ever arrive.</p></div>
+      <div class="rover-scene reveal">
+        <div class="mars-ground"></div>
+        <div class="mountain"></div>
+        <div class="rover-vehicle"><div class="rover-body">ATLAS</div><i></i><i></i><i></i><i></i></div>
+        <button class="hotspot h1" data-title="NAV CAMERA" data-text="Panoramic cameras create a 360° map of the terrain.">+</button>
+        <button class="hotspot h2" data-title="DRILL ARM" data-text="A robotic drill collects protected subsurface samples.">+</button>
+        <button class="hotspot h3" data-title="SPECTROMETER" data-text="Laser spectroscopy identifies minerals from a safe distance.">+</button>
+      </div>
+      <div class="hotspot-info glass" id="hotspotInfo"><span>ROVER SYSTEM</span><h3>Select a hotspot</h3><p>Tap any + marker to inspect ATLAS.</p></div>
+    </section>
+
+    <section class="section landscapes">
+      <div class="section-head reveal"><div class="eyebrow">05 // MARTIAN LANDSCAPES</div><h2>THERE IS NO <em>OTHER WORLD</em> LIKE IT.</h2></div>
+      <div class="land-grid">
+        <article class="land-card reveal active-land" data-land="OLYMPUS MONS"><div class="land-art volcano"></div><span>01</span><h3>OLYMPUS MONS</h3><p>The solar system's largest known volcano.</p></article>
+        <article class="land-card reveal" data-land="VALLES MARINERIS"><div class="land-art canyon"></div><span>02</span><h3>VALLES MARINERIS</h3><p>A canyon system stretching thousands of kilometres.</p></article>
+        <article class="land-card reveal" data-land="JEZERO CRATER"><div class="land-art crater"></div><span>03</span><h3>JEZERO CRATER</h3><p>An ancient delta where scientists search for clues of past life.</p></article>
+      </div>
+    </section>
+
+    <section class="section weather" id="weather">
+      <div class="section-head reveal"><div class="eyebrow">06 // MARTIAN WEATHER</div><h2>THE PLANET <em>CHANGES.</em></h2></div>
+      <div class="weather-grid">
+        <div class="weather-visual reveal" id="weatherVisual"><div class="weather-mars"></div><div class="weather-dust"></div><div class="weather-snow"></div></div>
+        <div class="weather-panel glass reveal">
+          <div class="weather-current"><span id="weatherIcon">☀</span><div><b id="weatherName">CLEAR SKIES</b><small id="weatherDesc">Low dust · visibility 90 km</small></div></div>
+          <div class="weather-buttons">
+            <button class="weather-btn active" data-weather="clear">☀ CLEAR</button>
+            <button class="weather-btn" data-weather="dust">〰 DUST</button>
+            <button class="weather-btn" data-weather="storm">⚠ GLOBAL STORM</button>
+            <button class="weather-btn" data-weather="cold">❄ COLD NIGHT</button>
+          </div>
+          <div class="weather-stats"><div><span>TEMP</span><b id="wTemp">−63°C</b></div><div><span>WIND</span><b id="wWind">18 KM/H</b></div><div><span>VISIBILITY</span><b id="wVis">90 KM</b></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section life" id="life">
+      <div class="section-head reveal"><div class="eyebrow">07 // SEARCH FOR LIFE</div><h2>LOOK BENEATH THE <em>SURFACE.</em></h2><p>Run a fictional field analysis on a Martian sample.</p></div>
+      <div class="lab glass reveal">
+        <div class="sample-tubes"><button class="sample active" data-sample="SOIL">S01</button><button class="sample" data-sample="ICE">I02</button><button class="sample" data-sample="ROCK">R07</button><button class="sample" data-sample="ATMOSPHERE">A03</button></div>
+        <div class="lab-screen"><div class="scan-grid"></div><div class="sample-orb" id="sampleOrb"></div><div class="scanline"></div><span id="sampleStatus">SAMPLE S01 // READY</span></div>
+        <div class="lab-result"><span>ANALYSIS RESULT</span><h3 id="sampleResult">ORGANIC SIGNATURES DETECTED</h3><p id="sampleText">Complex carbon-bearing molecules found. Further drilling recommended.</p><button class="btn primary" id="analyzeBtn">RUN ANALYSIS</button></div>
+      </div>
+    </section>
+
+    <section class="section communication">
+      <div class="section-head reveal"><div class="eyebrow">08 // EARTH ↔ MARS</div><h2>MESSAGE <em>DELAY.</em></h2><p>Communication is never instant across interplanetary distance.</p></div>
+      <div class="comms glass reveal">
+        <div class="planet earth-mini">EARTH</div><div class="signal-line"><i id="signalPacket"></i><span id="delayText">12m 34s</span></div><div class="planet mars-mini">MARS</div>
+        <div class="message-box"><input id="messageInput" maxlength="30" value="HELLO, MARS"><button class="btn primary" id="sendBtn">TRANSMIT</button></div>
+        <p id="messageStatus">READY TO TRANSMIT · ONE-WAY LIGHT-TIME DELAY SIMULATION</p>
+      </div>
+    </section>
+
+    <section class="section crew">
+      <div class="section-head reveal"><div class="eyebrow">09 // HUMAN FACTOR</div><h2>FOUR PEOPLE. <em>ONE WORLD.</em></h2></div>
+      <div class="crew-grid">
+        <article class="crew-card reveal" data-role="COMMANDER"><div class="avatar">C</div><span>01</span><h3>COMMANDER</h3><p>Mission leadership & surface operations.</p></article>
+        <article class="crew-card reveal" data-role="PILOT"><div class="avatar">P</div><span>02</span><h3>PILOT</h3><p>Navigation, descent & vehicle systems.</p></article>
+        <article class="crew-card reveal" data-role="ENGINEER"><div class="avatar">E</div><span>03</span><h3>ENGINEER</h3><p>Habitat, power & emergency systems.</p></article>
+        <article class="crew-card reveal" data-role="SCIENTIST"><div class="avatar">S</div><span>04</span><h3>SCIENTIST</h3><p>Geology, astrobiology & sample science.</p></article>
+      </div>
+      <div class="crew-detail glass" id="crewDetail"><span>CREW ROLE</span><b>SELECT A CREW MEMBER</b><p>Explore the human side of the mission.</p></div>
+    </section>
+
+    <section class="section base" id="base">
+      <div class="section-head reveal"><div class="eyebrow">10 // BUILD MARS</div><h2>BUILD THE FIRST <em>OUTPOST.</em></h2><p>Activate the systems required to turn a landing site into a home.</p></div>
+      <div class="base-layout">
+        <div class="base-visual glass reveal" id="baseVisual"><div class="base-core">MARS<br>BASE</div><div class="module m-power">POWER</div><div class="module m-hab">HABITAT</div><div class="module m-lab">LAB</div><div class="module m-green">GREENHOUSE</div><div class="module m-comms">COMMS</div></div>
+        <div class="base-controls glass reveal">
+          <div class="base-row"><span>01 · POWER</span><button data-module="power">ACTIVATE</button></div>
+          <div class="base-row"><span>02 · HABITAT</span><button data-module="hab">ACTIVATE</button></div>
+          <div class="base-row"><span>03 · LAB</span><button data-module="lab">ACTIVATE</button></div>
+          <div class="base-row"><span>04 · GREENHOUSE</span><button data-module="green">ACTIVATE</button></div>
+          <div class="base-row"><span>05 · COMMS</span><button data-module="comms">ACTIVATE</button></div>
+          <div class="base-ready"><span>MISSION READINESS</span><strong id="baseScore">0%</strong><i><b id="baseBar"></b></i></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section mars-clock">
+      <div class="clock-card glass reveal"><div><div class="eyebrow">11 // MARTIAN TIME</div><h2>SOL <em>184</em></h2><p>A Martian day is called a sol. It's slightly longer than an Earth day.</p></div><div class="big-clock"><span id="marsTime">17:42:08</span><small>LOCAL SOL TIME</small></div></div>
+    </section>
+
+    <section class="section future">
+      <div class="future-card reveal"><div class="eyebrow">12 // THE NEXT CHAPTER</div><h2>WE ARE NOT<br>JUST <em>VISITING.</em></h2><p>The first mission is only the beginning. The long-term goal is a sustainable human presence on another world.</p><div class="future-line"><span>2026</span><i></i><span>2035</span><i></i><span>2050+</span></div></div>
+    </section>
+
+
+    <section class="section mission-map" id="map">
+      <div class="section-head reveal"><div class="eyebrow">12 // INTERPLANETARY ROUTE</div><h2>THE ROAD TO <em>MARS.</em></h2><p>Track the mission across the solar system.</p></div>
+      <div class="space-map glass reveal">
+        <div class="map-stars"></div><div class="orbit earth-orbit"></div><div class="orbit mars-orbit"></div>
+        <div class="map-planet earth-map"><span>EARTH</span></div><div class="map-sun"></div><div class="map-planet mars-map"><span>MARS</span></div>
+        <div class="spacecraft"><i></i><span>MM-01</span></div><div class="map-route"></div>
+        <div class="map-data"><span>MISSION DISTANCE</span><b id="mapDistance">225,000,000 KM</b><small id="mapPhase">DEEP SPACE CRUISE</small></div>
+      </div>
+    </section>
+
+    <section class="section gallery" id="gallery">
+      <div class="section-head reveal"><div class="eyebrow">13 // MARS ARCHIVE</div><h2>POSTCARDS FROM <em>ANOTHER WORLD.</em></h2></div>
+      <div class="gallery-grid">
+        <button class="photo-card photo-olympus reveal" data-photo="OLYMPUS MONS" data-caption="A colossal shield volcano rising above the Martian plains."><span>ARCHIVE 01</span><b>OLYMPUS MONS</b></button>
+        <button class="photo-card photo-canyon reveal" data-photo="VALLES MARINERIS" data-caption="A canyon system carved across the Martian crust."><span>ARCHIVE 02</span><b>VALLES MARINERIS</b></button>
+        <button class="photo-card photo-delta reveal" data-photo="JEZERO DELTA" data-caption="An ancient river delta — a prime target in the search for past life."><span>ARCHIVE 03</span><b>JEZERO DELTA</b></button>
+        <button class="photo-card photo-night reveal" data-photo="MARS AT NIGHT" data-caption="A silent horizon under a cold, star-filled Martian sky."><span>ARCHIVE 04</span><b>MARS AT NIGHT</b></button>
+      </div>
+      <div class="photo-viewer" id="photoViewer"><div class="photo-viewer-inner"><button class="viewer-close" id="viewerClose">×</button><div class="viewer-art" id="viewerArt"></div><div><span>MISSION ARCHIVE</span><h3 id="viewerTitle">LOCATION</h3><p id="viewerCaption">Caption</p></div></div></div>
+    </section>
+
+    <section class="section survival" id="survival">
+      <div class="section-head reveal"><div class="eyebrow">14 // SURVIVAL SYSTEMS</div><h2>CAN HUMANS <em>LAST HERE?</em></h2><p>Monitor the critical resources of the first habitat.</p></div>
+      <div class="survival-grid glass reveal">
+        <div class="survival-visual"><div class="helmet"><div class="helmet-glow"></div><span>HAB-01</span></div></div>
+        <div class="survival-meters">
+          <div class="meter"><div><span>OXYGEN</span><b id="oxygenVal">92%</b></div><i><b id="oxygenBar"></b></i></div>
+          <div class="meter"><div><span>WATER</span><b id="waterVal">78%</b></div><i><b id="waterBar"></b></i></div>
+          <div class="meter"><div><span>RADIATION SHIELD</span><b id="radVal">96%</b></div><i><b id="radBar"></b></i></div>
+          <div class="meter"><div><span>POWER RESERVE</span><b id="powerVal">84%</b></div><i><b id="powerBar"></b></i></div>
+          <div class="meter"><div><span>THERMAL CONTROL</span><b id="thermalVal">89%</b></div><i><b id="thermalBar"></b></i></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section compass-section">
+      <div class="compass-card glass reveal"><div><div class="eyebrow">15 // NAVIGATION</div><h2>FIND YOUR <em>BEARING.</em></h2><p>Move your pointer around the compass to scan mission targets.</p></div><div class="compass" id="compass"><div class="compass-ring"><span>N</span><span>E</span><span>S</span><span>W</span></div><div class="compass-needle"></div><div class="compass-core">MARS</div></div><div class="bearing-readout"><span>BEARING</span><b id="bearing">000°</b><small id="bearingTarget">MARS BASE</small></div></div>
+    </section>
+
+    <section class="section achievements" id="achievements">
+      <div class="section-head reveal"><div class="eyebrow">16 // MISSION BADGES</div><h2>EARN YOUR <em>COMMAND.</em></h2></div>
+      <div class="badge-grid">
+        <article class="badge-card locked reveal" data-badge="first"><div>01</div><strong>FIRST CONTACT</strong><span>Transmit your first interplanetary message.</span></article>
+        <article class="badge-card locked reveal" data-badge="explorer"><div>02</div><strong>MARS EXPLORER</strong><span>Inspect a rover system.</span></article>
+        <article class="badge-card locked reveal" data-badge="builder"><div>03</div><strong>BASE BUILDER</strong><span>Activate every habitat module.</span></article>
+        <article class="badge-card locked reveal" data-badge="life"><div>04</div><strong>LIFE DETECTIVE</strong><span>Run a complete sample analysis.</span></article>
+        <article class="badge-card locked reveal" data-badge="commander"><div>05</div><strong>MISSION COMMANDER</strong><span>Reach 90% mission readiness.</span></article>
+      </div>
+    </section>
+
+    <section class="section daily-mars">
+      <div class="daily-card glass reveal"><div class="daily-art"><div class="daily-sun"></div><div class="daily-mountain"></div><div class="daily-rover"></div></div><div class="daily-copy"><div class="eyebrow">17 // MARS PHOTO OF THE SOL</div><h2>THE RED <em>HORIZON.</em></h2><p id="dailyCaption">Sol 184 · Jezero region · 17:42 local mission time.</p><div class="daily-meta"><span>VISIBILITY <b>91 KM</b></span><span>WIND <b>18 KM/H</b></span><span>STATUS <b>NOMINAL</b></span></div></div></div>
+    </section>
+
+    <section class="section final" id="final">
+      <div class="final-stars"></div>
+      <div class="final-content reveal">
+        <div class="eyebrow">MISSION COMPLETE</div>
+        <h2>WELCOME<br>TO <em>MARS.</em></h2>
+        <p>You launched. You explored. You searched for life. You built a future.</p>
+        <div class="mission-score"><span>MISSION READINESS</span><b id="missionScore">0%</b><small id="missionGrade">INITIALIZING</small></div>
+        <button class="btn primary" id="scoreBtn">CALCULATE MY MISSION</button>
+        <button class="btn ghost" id="topBtn">RETURN TO ORBIT ↑</button>
+      </div>
+    </section>
+  </main>
+
+  <footer><span>MISSION: MARS</span><span>AN INTERACTIVE SCI-FI EXPERIENCE</span><span>© 2026</span></footer>
+  <script src="script.js"></script>
+</body>
+</html>
